@@ -12,6 +12,7 @@ version = project.mod_version + "+" + project.minecraft_version
 group = project.maven_group
 
 repositories {
+  mavenCentral()
   maven { url = "https://maven.nucleoid.xyz" }
   maven { url = "https://maven.gegy.dev/" }
   maven { url = "https://jitpack.io" }
@@ -29,6 +30,8 @@ dependencies {
 
   modCompileOnly "dev.gegy:player-roles-api:1.6.7"
   modCompileOnly "me.lucko:fabric-permissions-api:0.2-SNAPSHOT"
+
+  compileOnly 'net.luckperms:api:5.4'
 }
 
 processResources {
