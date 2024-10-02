@@ -1,8 +1,6 @@
 name: Build
 
-on:
-  push:
-    branches: [ main ]
+on: push
 
 jobs:
   build:
@@ -30,3 +28,8 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: artifacts
+          path: build/libs
