@@ -1,15 +1,17 @@
 plugins {
-  id 'fabric-loom' version '1.6.+'
+  id 'fabric-loom' version '1.1.+'
   id "com.modrinth.minotaur" version "2.+"
 }
 import com.modrinth.minotaur.TaskModrinthUpload
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version + "+" + project.minecraft_version
 group = project.maven_group
 
 repositories {
-  mavenCentral()
   maven { url = "https://maven.nucleoid.xyz" }
   maven { url = "https://maven.gegy.dev/" }
   maven { url = "https://jitpack.io" }
@@ -23,12 +25,10 @@ dependencies {
 
   modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-  modImplementation include('xyz.nucleoid:stimuli:0.4.11+1.20.6')
+  modImplementation include('xyz.nucleoid:stimuli:0.4.10+1.20.4')
 
-  modCompileOnly "dev.gegy:player-roles-api:1.6.8"
+  modCompileOnly "dev.gegy:player-roles-api:1.6.7"
   modCompileOnly "me.lucko:fabric-permissions-api:0.2-SNAPSHOT"
-
-  compileOnly 'net.luckperms:api:5.4'
 }
 
 processResources {
@@ -41,14 +41,11 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
   it.options.encoding = "UTF-8"
-  it.options.release = 21
+  it.options.release = 17
 }
 
 java {
   withSourcesJar()
-
-  sourceCompatibility = JavaVersion.VERSION_21
-  targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {

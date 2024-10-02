@@ -1,6 +1,6 @@
 package xyz.nucleoid.leukocyte.shape;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import net.minecraft.text.Text;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
@@ -9,7 +9,7 @@ import xyz.nucleoid.stimuli.filter.EventFilter;
 public final class UniversalShape implements ProtectionShape {
     public static final UniversalShape INSTANCE = new UniversalShape();
 
-    public static MapCodec<UniversalShape> CODEC = MapCodec.unit(INSTANCE);
+    public static Codec<UniversalShape> CODEC = Codec.unit(INSTANCE);
 
     private UniversalShape() {
     }
@@ -20,7 +20,7 @@ public final class UniversalShape implements ProtectionShape {
     }
 
     @Override
-    public MapCodec<? extends ProtectionShape> getCodec() {
+    public Codec<? extends ProtectionShape> getCodec() {
         return CODEC;
     }
 

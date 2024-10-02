@@ -1,12 +1,11 @@
 package xyz.nucleoid.leukocyte;
 
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.PersistentState;
@@ -94,7 +93,7 @@ public final class Leukocyte extends PersistentState {
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound root, RegistryWrapper.WrapperLookup registryLookup) {
+    public NbtCompound writeNbt(NbtCompound root) {
         var authorityList = new NbtList();
 
         for (var authority : this.authorities) {
@@ -107,10 +106,10 @@ public final class Leukocyte extends PersistentState {
         return root;
     }
 
-    private static Leukocyte readNbt(NbtCompound root, RegistryWrapper.WrapperLookup registryLookup) {
+    private static Leukocyte readNbt(NbtCompound root) {
         var leukocyte = new Leukocyte();
 
-        var authoritiesList = root.getList("authorities", NbtElement.COMPOUND_TYPE);
+        var authoritiesList = root.getList("authorities", NbtType.COMPOUND);
 
         for (var authorityTag : authoritiesList) {
             Authority.CODEC.decode(NbtOps.INSTANCE, authorityTag)
